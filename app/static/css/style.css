@@ -1,11 +1,14 @@
-body { 
-  background: url(../images/background3.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+footer {
+	background-color: #4078a5;
+	position: absolute;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+  	padding: 1rem;
+  	text-align: center;
+  	height: 50px;
 }
 
-img {
-	vertical-align: middle;
+#copy {
+	color: white;
 }
