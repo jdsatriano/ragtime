@@ -8,8 +8,21 @@ def index():
 
 @app.route('/login')
 def login():
-	return render_template('login.html', title='login')
+	#retrieve username, pass and email from register form
+	username = request.form['username']
+	password = request.form['pass']
 
+	#check for user login
+	connection = mysql_get_db()
+	cursor = connection.cursor()
+	cursor.execute('SELECT password FROM users WHERE username = %s', username)
+	hashpass = cursor.fetchone()
+
+	if check_password_hash(hashpass, password):
+		return render_template('login.html', title='login')
+	else:
+		return render_template('index.html', title='index')
+		
 @app.route('/register', methods=['POST'])
 def register():
 	#retrieve username, pass and email from register form

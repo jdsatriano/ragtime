@@ -77,4 +77,25 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#login-submit").click(function() {
+		var username = $("#username").val();
+		var pass = $("#password").val();
+
+		$.ajax({
+			type: 'GET',
+			url: '/login',
+			datatype: 'json',
+			data: {
+				'username': username,
+				'pass': pass
+			},
+			success: function(response) {
+				document.write(response);
+			},
+			error: function() {
+				console.log("didn't work");
+			}
+		});
+	})
+
 });
