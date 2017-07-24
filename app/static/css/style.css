@@ -107,7 +107,7 @@ footer {
 	color: #666;
 }
 
-.btn-register {
+#register-submit {
 	background-color: #1CB94E;
 	outline: none;
 	color: #fff;
@@ -118,8 +118,8 @@ footer {
 	text-transform: uppercase;
 	border-color: #1CB94A;
 }
-.btn-register:hover,
-.btn-register:focus {
+#register-submit:hover,
+#register-submit:focus {
 	color: #fff;
 	background-color: #1CA347;
 	border-color: #1CA347;
