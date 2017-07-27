@@ -12,6 +12,8 @@ def login():
 	username = request.form['username']
 	password = request.form['pass']
 
+	print 'hello'
+
 	#check for user login
 	connection = mysql.get_db()
 	cursor = connection.cursor()

@@ -1,8 +1,13 @@
 from flask import Flask
+from flask_login import LoginManager
 from flaskext.mysql import MySQL
 
 #app configure
 app = Flask(__name__)
+
+#login man config
+loginManager = LoginManager()
+loginManager.init_app(app)
 
 #MySQL configurations
 mysql = MySQL()
