@@ -31,6 +31,11 @@ $.ajaxSetup({
 //------------------------------------------------------------------------------
 
 $(document).ready(function() {
+	function shakeForm() {
+		$("#password").css("border", "1px solid #d62929");
+   		$("#password").effect("shake");
+	}
+
 	// login/register toggle
 	$('#loginlink').click(function(e) {
     	$("#login-form").delay(100).fadeIn(100);
@@ -91,6 +96,7 @@ $(document).ready(function() {
 			},
 			success: function(response) {
 				console.log(response);
+				if (response == "didnt work") shakeForm();
 			},
 			error: function() {
 				console.log("ajax error");

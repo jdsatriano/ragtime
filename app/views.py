@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mysql
 
