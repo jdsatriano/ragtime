@@ -13,22 +13,26 @@
 		<!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 		<!-- JQuery -->
 		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
-			<center><img src="../static/images/logo1.png"></center>
+			<center><a href="/"><img src="../static/images/logo1.png"></a></center>
+			<center><h3 id="motto">LIVE MUSIC / WHENEVER / WHEREVER</h3></center>
+			<!-- login/register box -->
 			<div class="row" id="loginbox">
 				<div class="col-md-6 col-md-offset-3">
 					<div class="panel panel-login">
 						<div class="panel-heading">
+						<!-- login/register heading -->
 							<div class="row">
 								<div class="col-xs-6">
-									<a href="#" class="active" id="login-form-link">Login</a>
+									<a href="#" class="active" id="loginlink">Login</a>
 								</div>
 								<div class="col-xs-6">
-									<a href="#" id="register-form-link">Register</a>
+									<a href="#" id="registerlink">Register</a>
 								</div>
 							</div>
 							<hr>
@@ -48,13 +52,15 @@
 											<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
 											<label for="remember"> Remember Me</label>
 										</div>
+										<!-- login button -->
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<button type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login">LOG IN</button>
+													<button type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login hvr-shrink">LOG IN</button>
 												</div>
 											</div>
 										</div>
+										<!-- forgot password button -->
 										<div class="form-group">
 											<div class="row">
 												<div class="col-lg-12">
@@ -79,10 +85,11 @@
 										<div class="form-group">
 											<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
 										</div>
-										<div>
+										<!-- register button -->
+										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<button name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register">REGISTER NOW</button>
+													<button name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register hvr-shrink">REGISTER NOW</button>
 												</div>
 											</div>
 										</div>

@@ -10,7 +10,7 @@ body {
 }
 
 footer {
-	background-color: #4078a5;
+	background-color: #396a93;
 	position: absolute;
   	right: 0;
   	bottom: 0;
@@ -18,6 +18,11 @@ footer {
   	padding: 1rem;
   	text-align: center;
   	height: 50px;
+  	border-color: #396a93;
+}
+
+#motto {
+	font-family: 'Raleway', sans-serif;
 }
 
 #copy {
@@ -25,7 +30,7 @@ footer {
 }
 
 #loginbox {
-	margin-top: 70px;
+	margin-top: 50px;
 }
 
 .panel-login {
@@ -34,12 +39,14 @@ footer {
 	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
+
 .panel-login>.panel-heading {
 	color: #00415d;
 	background-color: #fff;
 	border-color: #fff;
 	text-align:center;
 }
+
 .panel-login>.panel-heading a{
 	text-decoration: none;
 	color: #666;
@@ -49,10 +56,12 @@ footer {
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
+
 .panel-login>.panel-heading a.active{
-	color: #029f5b;
+	color: #325d81;
 	font-size: 18px;
 }
+
 .panel-login>.panel-heading hr{
 	margin-top: 10px;
 	margin-bottom: 0px;
@@ -64,6 +73,7 @@ footer {
 	background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 }
+
 .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
 	height: 45px;
 	border: 1px solid #ddd;
@@ -72,6 +82,7 @@ footer {
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
+
 .panel-login input:hover,
 .panel-login input:focus {
 	outline:none;
@@ -80,8 +91,9 @@ footer {
 	box-shadow: none;
 	border-color: #ccc;
 }
-.btn-login {
-	background-color: #59B2E0;
+
+#login-submit {
+	background-color: #66cc92;
 	outline: none;
 	color: #fff;
 	font-size: 14px;
@@ -89,18 +101,14 @@ footer {
 	font-weight: normal;
 	padding: 14px 0;
 	text-transform: uppercase;
-	border-color: #59B2E6;
+	border-color: #66cc92;
 }
-.btn-login:hover,
-.btn-login:focus {
-	color: #fff;
-	background-color: #53A3CD;
-	border-color: #53A3CD;
-}
+
 .forgot-password {
 	text-decoration: underline;
 	color: #888;
 }
+
 .forgot-password:hover,
 .forgot-password:focus {
 	text-decoration: underline;
@@ -108,7 +116,7 @@ footer {
 }
 
 #register-submit {
-	background-color: #1CB94E;
+	background-color: #66cc92;
 	outline: none;
 	color: #fff;
 	font-size: 14px;
@@ -116,11 +124,6 @@ footer {
 	font-weight: normal;
 	padding: 14px 0;
 	text-transform: uppercase;
-	border-color: #1CB94A;
+	border-color: #66cc92;
 }
-#register-submit:hover,
-#register-submit:focus {
-	color: #fff;
-	background-color: #1CA347;
-	border-color: #1CA347;
-}
+

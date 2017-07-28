@@ -32,17 +32,17 @@ $.ajaxSetup({
 
 $(document).ready(function() {
 	// login/register toggle
-	$('#login-form-link').click(function(e) {
+	$('#loginlink').click(function(e) {
     	$("#login-form").delay(100).fadeIn(100);
  		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
+		$('#registerlink').removeClass('active');
 		$(this).addClass('active');
 		e.preventDefault();
 	});
-	$('#register-form-link').click(function(e) {
+	$('#registerlink').click(function(e) {
 		$("#register-form").delay(100).fadeIn(100);
  		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
+		$('#loginlink').removeClass('active');
 		$(this).addClass('active');
 		e.preventDefault();
 	});
@@ -82,7 +82,7 @@ $(document).ready(function() {
 		var pass = $("#password").val();
 
 		$.ajax({
-			type: 'GET',
+			type: 'POST',
 			url: '/login',
 			datatype: 'json',
 			data: {
@@ -90,10 +90,10 @@ $(document).ready(function() {
 				'pass': pass
 			},
 			success: function(response) {
-				document.write(response);
+				console.log(response);
 			},
 			error: function() {
-				console.log("didn't work");
+				console.log("ajax error");
 			}
 		});
 	})

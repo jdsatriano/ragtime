@@ -6,22 +6,25 @@ from app import app, mysql
 def index():
     return render_template('index.html', title='Home')
 
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
 	#retrieve username, pass and email from register form
 	username = request.form['username']
 	password = request.form['pass']
 
+	print 'hello'
+
 	#check for user login
-	connection = mysql_get_db()
+	connection = mysql.get_db()
 	cursor = connection.cursor()
 	cursor.execute('SELECT password FROM users WHERE username = %s', username)
-	hashpass = cursor.fetchone()
+	row = cursor.fetchone()
+	hashpass = row[0]
 
 	if check_password_hash(hashpass, password):
-		return render_template('login.html', title='login')
+		return 'it worked'
 	else:
-		return render_template('index.html', title='index')
+		return 'didnt work'
 		
 @app.route('/register', methods=['POST'])
 def register():
