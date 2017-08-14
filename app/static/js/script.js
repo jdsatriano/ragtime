@@ -52,6 +52,22 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
+	//go to user page
+	function userPage(resp) {
+		$.ajax({
+			type: "POST",
+			url: "/user",
+			datatype: "json",
+			data: {"username": resp},
+			success: function(page) {
+				document.write(page);
+			},
+			error: function(response) {
+				console.log(response.responseText);
+			}
+		});
+	}
+
 	//register user
 	$("#register-submit").click(function() {
 		var username = $("#user").val();
@@ -73,10 +89,10 @@ $(document).ready(function() {
 					'email': email
 				},
 				success: function(response) {
-					document.write(response);
+					userPage(response);
 				},
-				error: function() {
-					console.log("didn't work");
+				error: function(response) {
+					console.log(response.responseText);
 				}
 			});
 		}
@@ -95,11 +111,13 @@ $(document).ready(function() {
 				'pass': pass
 			},
 			success: function(response) {
-				console.log(response);
 				if (response == "didnt work") shakeForm();
+				else {
+					userPage(response);
+				}
 			},
-			error: function() {
-				console.log("ajax error");
+			error: function(response) {
+				console.log(response.responseText);
 			}
 		});
 	})

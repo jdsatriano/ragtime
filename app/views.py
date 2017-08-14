@@ -1,19 +1,36 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, make_response, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mysql
 
 @app.route('/')
 def index():
-    return render_template('index.html', title='Home')
+	if 'username' in session:
+		name = session['username']
+		user = {'name': name}
+		return render_template('userHome.html', user=user)
 
-@app.route('/login', methods=['POST'])
+	return render_template('index.html')
+
+@app.route('/user', methods=['POST', 'GET'])
+def userHome():
+	if request.method == 'GET':
+		return render_template('login.html')
+
+	name = request.form['username']
+	user = {'name': name}
+	return render_template('userHome.html', user=user)
+
+@app.route('/login', methods=['POST', 'GET'])
 def login():
+	#for users who try to access '/login' by type GET
+	if request.method == 'GET':
+		return render_template('login.html')
+
 	#retrieve username, pass and email from register form
 	username = request.form['username']
 	password = request.form['pass']
 
-	print 'hello'
-
+	
 	#check for user login
 	connection = mysql.get_db()
 	cursor = connection.cursor()
@@ -22,9 +39,11 @@ def login():
 	hashpass = row[0]
 
 	if check_password_hash(hashpass, password):
-		return 'it worked'
+		session['username'] = username
+		return username
 	else:
 		return 'didnt work'
+	
 		
 @app.route('/register', methods=['POST'])
 def register():
@@ -40,5 +59,5 @@ def register():
 	cursor.execute('INSERT INTO users (username, password, email) VALUES (%s, %s, %s)', (username, hashpass, email))
 	connection.commit()
 
-	return render_template('index.html', title='register')
+	return username
 

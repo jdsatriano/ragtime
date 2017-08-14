@@ -5,6 +5,8 @@ from flaskext.mysql import MySQL
 #app configure
 app = Flask(__name__)
 
+app.secret_key = 'development-key'
+
 #login man config
 loginManager = LoginManager()
 loginManager.init_app(app)
