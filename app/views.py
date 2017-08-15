@@ -1,24 +1,22 @@
 from flask import Flask, render_template, request, flash, make_response, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mysql
+from twilio.rest import Client
+
+# Your Account SID from twilio.com/console
+account_sid = 'AC655a3c0b592ec681b459b61996a88729'
+# Your Auth Token from twilio.com/console
+auth_token  = 'your_auth_token'
 
 @app.route('/')
 def index():
+	#if user is still signed in
 	if 'username' in session:
 		name = session['username']
 		user = {'name': name}
 		return render_template('userHome.html', user=user)
 
 	return render_template('index.html')
-
-@app.route('/user', methods=['POST', 'GET'])
-def userHome():
-	if request.method == 'GET':
-		return render_template('login.html')
-
-	name = request.form['username']
-	user = {'name': name}
-	return render_template('userHome.html', user=user)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -40,7 +38,8 @@ def login():
 
 	if check_password_hash(hashpass, password):
 		session['username'] = username
-		return username
+		user = {'name': username}
+		return render_template('userHome.html', user=user)
 	else:
 		return 'didnt work'
 	
@@ -59,5 +58,17 @@ def register():
 	cursor.execute('INSERT INTO users (username, password, email) VALUES (%s, %s, %s)', (username, hashpass, email))
 	connection.commit()
 
+	session['username'] = username
 	return username
+
+@app.route('/logout', methods=['POST'])
+def logout():
+	
+	client = Client(account_sid, auth_token)
+	message = client.messages.create(
+		    to='+12817148070', 
+		    from_='+18324302281',
+		    body='you logged out of ragtime')
+	session.pop('username', None)
+	return render_template('index.html')
 

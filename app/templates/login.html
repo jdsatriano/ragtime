@@ -1,1 +1,105 @@
-logged in!
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- Title and favicon -->
+		<title>Ragtime</title>
+		<link rel="shortcut icon" type="image/png" href="../static/images/logo1.png"/>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- CSS -->
+		<link rel="stylesheet" href="../static/css/style.css" type="text/css">
+		<link href="../static/css/hover.css" rel="stylesheet" media="all">
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<!-- JQuery -->
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body style="background-color: #d9d9d9">
+		<div class="container">
+			<!-- login/register box -->
+			<div class="row" id="loginbox" style="margin-top: 20%">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="panel panel-login">
+						<div class="panel-heading">
+						<!-- login/register heading -->
+							<div class="row">
+								<div class="col-xs-6">
+									<a href="#" class="active" id="loginlink">Login</a>
+								</div>
+								<div class="col-xs-6">
+									<a href="#" id="registerlink">Register</a>
+								</div>
+							</div>
+							<hr>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<!-- login form -->
+									<div id="login-form" style="display: block;">
+										<div class="form-group">
+											<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										</div>
+										<div class="form-group">
+											<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										</div>
+										<!-- login button -->
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<button type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login hvr-shrink">LOG IN</button>
+												</div>
+											</div>
+										</div>
+										<!-- forgot password button -->
+										<div class="form-group">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="text-center">
+														<a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- register form -->
+									<div id="register-form" style="display: none;">
+										<div class="form-group">
+											<input type="text" name="user" id="user" tabindex="1" class="form-control" placeholder="Username" value="">
+										</div>
+										<div class="form-group">
+											<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+										</div>
+										<div class="form-group">
+											<input type="password" name="pass" id="pass" tabindex="2" class="form-control" placeholder="Password">
+										</div>
+										<div class="form-group">
+											<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+										</div>
+										<!-- register button -->
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<button name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register hvr-shrink">REGISTER NOW</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<p id="copy">&copy;Ragtime 2017</p>
+		</footer>
+		<!-- script -->
+		<script type="text/javascript" src="../static/js/script.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	</body>
+</html>

@@ -52,22 +52,6 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
-	//go to user page
-	function userPage(resp) {
-		$.ajax({
-			type: "POST",
-			url: "/user",
-			datatype: "json",
-			data: {"username": resp},
-			success: function(page) {
-				document.write(page);
-			},
-			error: function(response) {
-				console.log(response.responseText);
-			}
-		});
-	}
-
 	//register user
 	$("#register-submit").click(function() {
 		var username = $("#user").val();
@@ -76,7 +60,8 @@ $(document).ready(function() {
 		var passCheck = $("#confirm-password").val();
 
 		if (pass != passCheck) {
-			console.log("not equal!");
+			$("#confirm-password").css("border", "1px solid #d62929");
+			$("#confirm-password").effect("shake");
 		}
 		else {
 			$.ajax({
@@ -89,7 +74,8 @@ $(document).ready(function() {
 					'email': email
 				},
 				success: function(response) {
-					userPage(response);
+					document.write(response);
+					window.location.reload(true);
 				},
 				error: function(response) {
 					console.log(response.responseText);
@@ -112,14 +98,30 @@ $(document).ready(function() {
 			},
 			success: function(response) {
 				if (response == "didnt work") shakeForm();
-				else {
-					userPage(response);
+				else { 
+					document.write(response);
+					window.location.reload(true);
 				}
 			},
 			error: function(response) {
 				console.log(response.responseText);
 			}
 		});
-	})
+	});
+
+	$("#logout").click(function() {
+		console.log("hello");
+		$.ajax({
+			type: "POST",
+			url: "/logout",
+			success: function(response) { 
+				document.write(response);
+				window.location.reload(true);
+			},
+			error: function(response) {
+				console.log(response.responseText);
+			}
+		});
+	});
 
 });

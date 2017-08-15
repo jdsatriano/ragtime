@@ -1,11 +1,12 @@
 from flask import Flask
 from flask_login import LoginManager
 from flaskext.mysql import MySQL
+import os
 
 #app configure
 app = Flask(__name__)
 
-app.secret_key = 'development-key'
+app.secret_key = os.urandom(24)
 
 #login man config
 loginManager = LoginManager()
