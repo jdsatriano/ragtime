@@ -2,11 +2,23 @@ from flask import Flask, render_template, request, flash, make_response, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mysql
 from twilio.rest import Client
+from multiprocessing import Process
+import eventful
+
+api = eventful.API('your_API_key')
+
+# If you need to log in:
+# api.login('username', 'password')
+
+events = api.call('/events/search', q='music', l='San Diego')
+for event in events['events']['event']:
+    print "%s at %s" % (event['title'], event['venue_name'])
+
 
 # Your Account SID from twilio.com/console
 account_sid = 'AC655a3c0b592ec681b459b61996a88729'
 # Your Auth Token from twilio.com/console
-auth_token  = 'your_auth_token'
+auth_token  = 'your_API_key'
 
 @app.route('/')
 def index():
@@ -28,7 +40,6 @@ def login():
 	username = request.form['username']
 	password = request.form['pass']
 
-	
 	#check for user login
 	connection = mysql.get_db()
 	cursor = connection.cursor()
@@ -71,4 +82,31 @@ def logout():
 		    body='you logged out of ragtime')
 	session.pop('username', None)
 	return render_template('index.html')
+
+
+
+def func(x):
+	while True:
+		client = Client(account_sid, auth_token)
+		message = client.messages.create(
+			    to='+12817148070', 
+			    from_='+18324302281',
+			    body='you logged out of ragtime')
+
+x = 1
+#p = Process(target=func, args=(x,))
+#p.start()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
