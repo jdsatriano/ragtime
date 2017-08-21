@@ -1,24 +1,21 @@
-from flask import Flask, render_template, request, flash, make_response, session
+from flask import Flask, render_template, request, flash, make_response, session, json
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mysql
 from twilio.rest import Client
 from multiprocessing import Process
 import eventful
 
-api = eventful.API('your_API_key')
+api = eventful.API('cFcTHMNmdbgxPZmG')
 
 # If you need to log in:
 # api.login('username', 'password')
 
-events = api.call('/events/search', q='music', l='San Diego')
-for event in events['events']['event']:
-    print "%s at %s" % (event['title'], event['venue_name'])
 
 
 # Your Account SID from twilio.com/console
 account_sid = 'AC655a3c0b592ec681b459b61996a88729'
 # Your Auth Token from twilio.com/console
-auth_token  = 'your_API_key'
+auth_token  = 'df6e17437def90ec7606a988358b0b84'
 
 @app.route('/')
 def index():
@@ -35,7 +32,7 @@ def login():
 	#for users who try to access '/login' by type GET
 	if request.method == 'GET':
 		return render_template('login.html')
-
+ 
 	#retrieve username, pass and email from register form
 	username = request.form['username']
 	password = request.form['pass']
@@ -61,12 +58,13 @@ def register():
 	username = request.form['username']
 	password = request.form['pass']
 	email = request.form['email']
+	phone = request.form['phone']
 	hashpass = generate_password_hash(password) #hash password
 
 	#authenticate user
 	connection = mysql.get_db()
 	cursor = connection.cursor()
-	cursor.execute('INSERT INTO users (username, password, email) VALUES (%s, %s, %s)', (username, hashpass, email))
+	cursor.execute('INSERT INTO users (username, password, email, phone) VALUES (%s, %s, %s, %s)', (username, hashpass, email, phone))
 	connection.commit()
 
 	session['username'] = username
@@ -74,7 +72,6 @@ def register():
 
 @app.route('/logout', methods=['POST'])
 def logout():
-	
 	client = Client(account_sid, auth_token)
 	message = client.messages.create(
 		    to='+12817148070', 
@@ -83,19 +80,39 @@ def logout():
 	session.pop('username', None)
 	return render_template('index.html')
 
+@app.route('/artistLoad', methods=['POST'])
+def load():
+	lis = []
+
+	name = request.form['name']
+	connection = mysql.get_db()
+	cursor = connection.cursor()
+	cursor.execute('SELECT * FROM musicians WHERE artist LIKE %s', name+'%')
+	rows = cursor.fetchall()
+
+	for row in rows:
+		name = row[0]
+		lis.append(name)
+
+	artists = {'list': lis}
+	return artists
 
 
 def func(x):
-	while True:
-		client = Client(account_sid, auth_token)
-		message = client.messages.create(
+	client = Client(account_sid, auth_token)
+	events = api.call('/events/search', location='Holmdel, NJ', date='Future', keywords='John Mayer')
+	for event in events['events']['event']:
+	    #print "%s at %s" % (event['title'], event['venue_name'])
+	    #print event['start_time']
+	    st = event['title'] + ' at ' + event['venue_name'] + ' ' + event['start_time']
+	    message = client.messages.create(
 			    to='+12817148070', 
 			    from_='+18324302281',
-			    body='you logged out of ragtime')
-
+			    body=st)
+'''	    
 x = 1
-#p = Process(target=func, args=(x,))
-#p.start()
+p = Process(target=func, args=(x,))
+p.start()'''
 
 
 

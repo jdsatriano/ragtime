@@ -56,6 +56,7 @@ $(document).ready(function() {
 	$("#register-submit").click(function() {
 		var username = $("#user").val();
 		var email = $("#email").val();
+		var phone = $("#phone").val();
 		var pass = $("#pass").val();
 		var passCheck = $("#confirm-password").val();
 
@@ -65,13 +66,14 @@ $(document).ready(function() {
 		}
 		else {
 			$.ajax({
-				type: 'POST',
-				url: '/register',
-				datatype: 'json',
+				type: "POST",
+				url: "/register",
+				datatype: "json",
 				data: {
-					'username': username,
-					'pass': pass,
-					'email': email
+					"username": username,
+					"pass": pass,
+					"email": email,
+					"phone": phone
 				},
 				success: function(response) {
 					document.write(response);
@@ -89,12 +91,12 @@ $(document).ready(function() {
 		var pass = $("#password").val();
 
 		$.ajax({
-			type: 'POST',
-			url: '/login',
-			datatype: 'json',
+			type: "POST",
+			url: "/login",
+			datatype: "json",
 			data: {
-				'username': username,
-				'pass': pass
+				"username": username,
+				"pass": pass
 			},
 			success: function(response) {
 				if (response == "didnt work") shakeForm();
@@ -110,7 +112,6 @@ $(document).ready(function() {
 	});
 
 	$("#logout").click(function() {
-		console.log("hello");
 		$.ajax({
 			type: "POST",
 			url: "/logout",
@@ -124,4 +125,52 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#artistFill").keyup(function() {
+		var name = $("#artistFill").val();
+		$.ajax({
+			type: "POST",
+			datatype: "json",
+			url: "/artistLoad",
+			data: {"name": name},
+			success: function(response) {
+				/*for (i = 0; i < response.length; i++) {
+                    $("#artistList").append("<option value=" + response[i] + ">")
+                    console.log(response[i]);
+                    break;
+                    if (i > 10) {
+                        break;
+                    }
+                }*/
+                console.log(typeof response);
+			},
+			error: function(response) {
+				console.log(response.responseText);
+			}
+		});
+	});
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

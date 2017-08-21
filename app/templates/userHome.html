@@ -18,8 +18,17 @@
 		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<h1>Hello, {{user.name}}</h1>
-		<button id="logout">logout</button>
+		<div class="row">
+			<h1>Hello, {{user.name}}</h1>
+			<button id="logout">logout</button>
+			<hr>
+		</div>
+		<div class="container">
+			<center><input id="artistFill" type="text" list="artistList"><datalist id="artistList"></datalist></center>
+		</div>
+	<footer class="footer">
+		<p id="copy">&copy;Ragtime 2017</p>
+	</footer>
 	<!-- script -->
 	<script type="text/javascript" src="../static/js/script.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
