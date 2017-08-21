@@ -23,7 +23,7 @@ footer {
 
 #motto {
 	font-family: 'Raleway', sans-serif;
-	margin-top: 0;
+	margin-top: 5px;
 }
 
 #copy {
@@ -128,13 +128,17 @@ footer {
 	border-color: #66cc92;
 }
 
-button {
-	float: right;
-	margin-right: 60px;
-	margin-top: -40px;
+h1 {
+	margin-left: 50px;
 }
 
-h1 {
-	margin-left: 40px;
+#logout {
+	float: right;
+	margin-right: 70px;
+	margin-top: -30px;
 }
+
+
+
+
 
