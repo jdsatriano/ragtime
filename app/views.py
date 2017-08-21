@@ -5,7 +5,7 @@ from twilio.rest import Client
 from multiprocessing import Process
 import eventful
 
-api = eventful.API('cFcTHMNmdbgxPZmG')
+api = eventful.API('YOUR_KEY')
 
 # If you need to log in:
 # api.login('username', 'password')
@@ -13,9 +13,9 @@ api = eventful.API('cFcTHMNmdbgxPZmG')
 
 
 # Your Account SID from twilio.com/console
-account_sid = 'AC655a3c0b592ec681b459b61996a88729'
+account_sid = ''
 # Your Auth Token from twilio.com/console
-auth_token  = 'df6e17437def90ec7606a988358b0b84'
+auth_token  = ''
 
 @app.route('/')
 def index():
