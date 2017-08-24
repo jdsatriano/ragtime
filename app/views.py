@@ -5,12 +5,16 @@ from twilio.rest import Client
 from multiprocessing import Process
 import eventful, time, MySQLdb
 
+<<<<<<< HEAD
 api = eventful.API('YOUR_API_KEY')
 
 # Your Account SID from twilio.com/console
 account_sid = 'YOUR_SID'
 # Your Auth Token from twilio.com/console
 auth_token  = 'YOUR_TOKEN'
+=======
+api = eventful.API('YOUR_KEY')
+>>>>>>> f6d5752848c9e087ffaed2f782f0699429135765
 
 # If you need to log in:
 # api.login('username', 'password')
@@ -22,6 +26,7 @@ cursor = db.cursor()
 def alert():
 	client = Client(account_sid, auth_token)
 
+<<<<<<< HEAD
 	cursor.execute('SELECT * FROM users')
 	rows = cursor.fetchall()
 
@@ -50,6 +55,12 @@ def loop(x):
 	while(True):
 		time.sleep(86400)
 		alert()
+=======
+# Your Account SID from twilio.com/console
+account_sid = ''
+# Your Auth Token from twilio.com/console
+auth_token  = ''
+>>>>>>> f6d5752848c9e087ffaed2f782f0699429135765
 
 @app.route('/')
 def index():
