@@ -1,21 +1,55 @@
-from flask import Flask, render_template, request, flash, make_response, session, json
+from flask import Flask, render_template, request, flash, make_response, session, jsonify, json
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mysql
 from twilio.rest import Client
 from multiprocessing import Process
-import eventful
+import eventful, time, MySQLdb
 
-api = eventful.API('cFcTHMNmdbgxPZmG')
+api = eventful.API('YOUR_API_KEY')
+
+# Your Account SID from twilio.com/console
+account_sid = 'YOUR_SID'
+# Your Auth Token from twilio.com/console
+auth_token  = 'YOUR_TOKEN'
 
 # If you need to log in:
 # api.login('username', 'password')
 
+db = MySQLdb.connect(host='localhost', user='root', passwd='Satchabooty30', db='ragtime')
+cursor = db.cursor()
 
+#main loop to check each users artistlist and send alerts accordingly
+def alert():
+	client = Client(account_sid, auth_token)
 
-# Your Account SID from twilio.com/console
-account_sid = 'AC655a3c0b592ec681b459b61996a88729'
-# Your Auth Token from twilio.com/console
-auth_token  = 'df6e17437def90ec7606a988358b0b84'
+	cursor.execute('SELECT * FROM users')
+	rows = cursor.fetchall()
+
+	for row in rows:
+		phone = '+1' + row[3]
+		lis = json.loads(row[4])
+		for artist in lis:
+			#api doesn't accept '&' as in Mumord & Sons, so try changing to 'and'
+			try:
+				artist = artist.replace('&', 'and')
+			except:
+				x = 1
+			try:
+				events = api.call('/events/search', location='Houston, TX', date='Today', keywords=artist)
+				for event in events['events']['event']:
+				    st = event['title'] + ' at ' + event['venue_name'] + ' ' + event['start_time']
+				    message = client.messages.create(
+						    to=phone, 
+						    from_='+18324302281',
+						    body=st)
+			except:
+				x = 1
+			print artist
+
+def loop(x):
+	while(True):
+		time.sleep(86400)
+		alert()
 
 @app.route('/')
 def index():
@@ -61,10 +95,14 @@ def register():
 	phone = request.form['phone']
 	hashpass = generate_password_hash(password) #hash password
 
+	#empty artist list
+	artistList = []
+	artistList = json.dumps(artistList)
+
 	#authenticate user
 	connection = mysql.get_db()
 	cursor = connection.cursor()
-	cursor.execute('INSERT INTO users (username, password, email, phone) VALUES (%s, %s, %s, %s)', (username, hashpass, email, phone))
+	cursor.execute('INSERT INTO users (username, password, email, phone, artistlist) VALUES (%s, %s, %s, %s, %s)', (username, hashpass, email, phone, artistList))
 	connection.commit()
 
 	session['username'] = username
@@ -87,7 +125,7 @@ def load():
 	name = request.form['name']
 	connection = mysql.get_db()
 	cursor = connection.cursor()
-	cursor.execute('SELECT * FROM musicians WHERE artist LIKE %s', name+'%')
+	cursor.execute('SELECT * FROM musicians WHERE artist LIKE %s LIMIT 10', name+'%')
 	rows = cursor.fetchall()
 
 	for row in rows:
@@ -95,23 +133,30 @@ def load():
 		lis.append(name)
 
 	artists = {'list': lis}
-	return artists
+	return jsonify(artists)
 
+@app.route('/addArtist', methods=['POST'])
+def addArtist():
+	artistName = request.form['artistName']
+	name = session['username']
 
-def func(x):
-	client = Client(account_sid, auth_token)
-	events = api.call('/events/search', location='Holmdel, NJ', date='Future', keywords='John Mayer')
-	for event in events['events']['event']:
-	    #print "%s at %s" % (event['title'], event['venue_name'])
-	    #print event['start_time']
-	    st = event['title'] + ' at ' + event['venue_name'] + ' ' + event['start_time']
-	    message = client.messages.create(
-			    to='+12817148070', 
-			    from_='+18324302281',
-			    body=st)
-'''	    
+	connection = mysql.get_db()
+	cursor = connection.cursor()
+	cursor.execute('SELECT artistlist FROM users WHERE username = %s', name)
+	row = cursor.fetchone()
+
+	lis = json.loads(row[0])
+	lis.append(artistName)
+	lis = json.dumps(lis)
+
+	cursor.execute('UPDATE users SET artistlist = %s WHERE username = %s', (lis, name))
+	connection.commit()
+
+	return 'ok'
+
+'''
 x = 1
-p = Process(target=func, args=(x,))
+p = Process(target=loop, args=(x,))
 p.start()'''
 
 

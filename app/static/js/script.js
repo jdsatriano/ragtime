@@ -126,6 +126,7 @@ $(document).ready(function() {
 	});
 
 	$("#artistFill").keyup(function() {
+		$("#artistList").empty();
 		var name = $("#artistFill").val();
 		$.ajax({
 			type: "POST",
@@ -133,15 +134,54 @@ $(document).ready(function() {
 			url: "/artistLoad",
 			data: {"name": name},
 			success: function(response) {
-				/*for (i = 0; i < response.length; i++) {
-                    $("#artistList").append("<option value=" + response[i] + ">")
-                    console.log(response[i]);
-                    break;
-                    if (i > 10) {
-                        break;
-                    }
-                }*/
-                console.log(typeof response);
+                var name1 = response.list[0];
+                var name2 = response.list[1];
+                var name3 = response.list[2];
+                var name4 = response.list[3];
+                var name5 = response.list[4];
+                var name6 = response.list[5];
+                var name7 = response.list[6];
+                var name8 = response.list[7];
+                var name9 = response.list[8];
+                var name10 = response.list[9];
+          
+                $("#artistList").append("<option id=1>")
+                $("#artistList").append("<option id=2>")
+                $("#artistList").append("<option id=3>")
+                $("#artistList").append("<option id=4>")
+                $("#artistList").append("<option id=5>")
+                $("#artistList").append("<option id=6>")
+                $("#artistList").append("<option id=7>")
+                $("#artistList").append("<option id=8>")
+                $("#artistList").append("<option id=9>")
+                $("#artistList").append("<option id=10>")
+
+                $("#1").val(name1);
+                $("#2").val(name2);
+                $("#3").val(name3);
+                $("#4").val(name4);
+                $("#5").val(name5);
+                $("#6").val(name6);
+                $("#7").val(name7);
+                $("#8").val(name8);
+                $("#9").val(name9);
+                $("#10").val(name10);
+			},
+			error: function(response) {
+				console.log(response.responseText);
+			}
+		});
+	});
+
+	$("#addButt").click(function() {
+		var artistName = $("#artistFill").val();
+		$.ajax({
+			type: "POST",
+			url: "/addArtist",
+			datatype: "JSON",
+			data: {"artistName": artistName},
+			success: function(response) {
+				console.log(response);
 			},
 			error: function(response) {
 				console.log(response.responseText);
