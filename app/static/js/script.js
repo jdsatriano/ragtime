@@ -121,7 +121,6 @@ $(document).ready(function() {
 			url: "/logout",
 			success: function(response) { 
 				document.write(response);
-				window.location.reload(true);
 			},
 			error: function(response) {
 				console.log(response.responseText);
@@ -188,16 +187,7 @@ $(document).ready(function() {
 			datatype: "JSON",
 			data: {"artistName": artistName},
 			success: function(response) {
-				$("#followHeading").show();
-				$("#following").show();
-				$("#newUser").hide();
-				$("#following").append("<div class=row>" +
-					"<h4 class=artistRow>" + artistName + "</h4>" +
-					"<button class=deletes id=" + artistName + "><img src=../static/images/delete.png></button>" + 
-					"</div>" +
-					"<center><hr id=hr></center>");
-				var objDiv = document.getElementById("following");
-				objDiv.scrollTop = objDiv.scrollHeight;
+				window.location.reload(true);
 			},
 			error: function(response) {
 				console.log(response.responseText);
@@ -205,6 +195,30 @@ $(document).ready(function() {
 		});
 	});
 
+	//deleting artist from follow list
+	$(".deletes").click(function() {
+		var artistName = $(this).siblings('h4').text();
+		$(this).parent().remove();
+		$.ajax({
+			type: "POST",
+			url: "/removeArtist",
+			datatype: "JSON",
+			data: {"artistName": artistName},
+			success: function(response) {},
+			error: function(response) {
+				console.log(response.responseText);
+			}
+		});
+	});
+
 });
+
+
+
+
+
+
+
+
 
 

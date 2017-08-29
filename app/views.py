@@ -52,7 +52,6 @@ def alert():
 			except:
 				#do nothing
 				x = 1
-				print artist
 
 def loop(x):
 	while(True):
@@ -76,7 +75,8 @@ def index():
 		cursor.execute('SELECT artistList FROM users WHERE username = %s', name)
 		row = cursor.fetchone()
 		lis = lis = json.loads(row[0])
-		print len(lis)
+		lis.reverse()
+
 		user = {
 		'name': name,
 		'lis': lis,
@@ -183,7 +183,24 @@ def addArtist():
 	else:
 		return 'empty artist field error'
 
+@app.route('/removeArtist', methods=['POST'])
+def remove():
+	artistName = request.form['artistName']
+	name = session['username']
 
+	connection = mysql.get_db()
+	cursor = connection.cursor()
+	cursor.execute('SELECT artistlist FROM users WHERE username = %s', name)
+	row = cursor.fetchone()
+
+	lis = json.loads(row[0])
+	lis.remove(artistName)
+	lis = json.dumps(lis)
+
+	cursor.execute('UPDATE users SET artistlist = %s WHERE username = %s', (lis, name))
+	connection.commit()
+
+	return 'ok'
 
 
 
