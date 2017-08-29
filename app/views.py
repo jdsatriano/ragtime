@@ -7,11 +7,11 @@ import eventful, time, MySQLdb
 from datetime import datetime
 
 # Your Account SID from twilio.com/console
-account_sid = 'YOUR_SID'
+account_sid = 'AC655a3c0b592ec681b459b61996a88729'
 # Your Auth Token from twilio.com/console
-auth_token  = 'YOUR_AUTH_TOKEN'
+auth_token  = 'df6e17437def90ec7606a988358b0b84'
 
-api = eventful.API('YOUR_API_KEY')
+api = eventful.API('cFcTHMNmdbgxPZmG')
 
 #connect to db, this is for use of alerts
 db = MySQLdb.connect(host='localhost', user='root', passwd='Satchabooty30', db='ragtime')
@@ -54,6 +54,7 @@ def alert():
 				x = 1
 
 def loop(x):
+	alert()
 	while(True):
 		time.sleep(86400)
 		alert()
