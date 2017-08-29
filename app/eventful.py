@@ -9,7 +9,7 @@ __author__    = "Edward O'Connor <ted@eventful.com>"
 __copyright__ = "Copyright 2005, 2006 Eventful Inc."
 __license__   = "MIT"
 
-import md5
+import hashlib
 import urllib
 
 import httplib2
@@ -57,8 +57,8 @@ If you don't have an application key, you can request one:
     def login(self, user, password):
         "Login to the Eventful API as USER with PASSWORD."
         nonce = self.call('/users/login')['nonce']
-        response = md5.new(nonce + ':'
-                           + md5.new(password).hexdigest()).hexdigest()
+        response = hashlib.new(nonce + ':'
+                           + hashlib.new(password).hexdigest()).hexdigest()
         login = self.call('/users/login', user=user, nonce=nonce,
                           response=response)
         self.user_key = login['user_key']
