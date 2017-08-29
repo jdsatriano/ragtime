@@ -3,8 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mysql
 from twilio.rest import Client
 from multiprocessing import Process
-import time, MySQLdb
-from . import eventful
+import time
+from . import eventful, MySQLdb
 from datetime import datetime
 
 # Your Account SID from twilio.com/console
