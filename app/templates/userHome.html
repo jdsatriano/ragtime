@@ -20,14 +20,34 @@
 	<body>
 		<div class="row">
 			<h1>Hello, {{user.name}}</h1>
-			<button id="logout">logout</button>
+			<button type="button" id="logout" class="btn btn-secondary hvr-shrink">logout</button>
 			<hr>
 		</div>
 		<div class="container">
 			<center>
-				<input id="artistFill" type="text" list="artistList"><datalist id="artistList"></datalist>
+				<input id="artistFill" type="text" list="artistList" placeholder="search for artist"><datalist id="artistList"></datalist>
 				<img class="hvr-shrink" id="addButt" src="../static/images/add.png">
 			</center>
+			<center><h2 id="followHeading" style="margin-top: 20%;opacity: 0.5;margin-right: 30px;display: none;">Following</h2></center>
+			<center><div id="following">
+				{% if user.len != 0 %}
+					<script type="text/javascript">document.getElementById("followHeading").style.display = "block";</script>
+					{% for artist in user.lis %}
+						<div class="row">
+							<h4 class="artistRow">{{artist}}</h4>
+							<button class="deletes"><img src="../static/images/delete.png"></button>
+							<center><hr id=hr></center>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div></center>
+			{% if user.len == 0 %}
+				<script type="text/javascript">document.getElementById("following").style.display = "none";</script>
+				<div id="newUser">
+					<center><h3>Welcome! Start following some artists!</h3></center>
+					<center><img src="../static/images/smile.png"></center>
+				</div>
+			{% endif %}
 		</div>
 	<footer class="footer">
 		<p id="copy">&copy;Ragtime 2017</p>

@@ -59,6 +59,7 @@ $(document).ready(function() {
 		var phone = $("#phone").val();
 		var pass = $("#pass").val();
 		var passCheck = $("#confirm-password").val();
+		var loc = $("#location").val();
 
 		if (pass != passCheck) {
 			$("#confirm-password").css("border", "1px solid #d62929");
@@ -73,7 +74,8 @@ $(document).ready(function() {
 					"username": username,
 					"pass": pass,
 					"email": email,
-					"phone": phone
+					"phone": phone,
+					"location": loc
 				},
 				success: function(response) {
 					document.write(response);
@@ -86,6 +88,7 @@ $(document).ready(function() {
 		}
 	});
 
+	//login
 	$("#login-submit").click(function() {
 		var username = $("#username").val();
 		var pass = $("#password").val();
@@ -111,6 +114,7 @@ $(document).ready(function() {
 		});
 	});
 
+	//logout
 	$("#logout").click(function() {
 		$.ajax({
 			type: "POST",
@@ -125,6 +129,7 @@ $(document).ready(function() {
 		});
 	});
 
+	//for filling input box with artist suggestions on userhome page
 	$("#artistFill").keyup(function() {
 		$("#artistList").empty();
 		var name = $("#artistFill").val();
@@ -134,16 +139,16 @@ $(document).ready(function() {
 			url: "/artistLoad",
 			data: {"name": name},
 			success: function(response) {
-                var name1 = response.list[0];
-                var name2 = response.list[1];
-                var name3 = response.list[2];
-                var name4 = response.list[3];
-                var name5 = response.list[4];
-                var name6 = response.list[5];
-                var name7 = response.list[6];
-                var name8 = response.list[7];
-                var name9 = response.list[8];
-                var name10 = response.list[9];
+                var name1 = response[0];
+                var name2 = response[1];
+                var name3 = response[2];
+                var name4 = response[3];
+                var name5 = response[4];
+                var name6 = response[5];
+                var name7 = response[6];
+                var name8 = response[7];
+                var name9 = response[8];
+                var name10 = response[9];
           
                 $("#artistList").append("<option id=1>")
                 $("#artistList").append("<option id=2>")
@@ -173,15 +178,26 @@ $(document).ready(function() {
 		});
 	});
 
+	//adding artist to user artist list
 	$("#addButt").click(function() {
 		var artistName = $("#artistFill").val();
+		$("#artistFill").val("");
 		$.ajax({
 			type: "POST",
 			url: "/addArtist",
 			datatype: "JSON",
 			data: {"artistName": artistName},
 			success: function(response) {
-				console.log(response);
+				$("#followHeading").show();
+				$("#following").show();
+				$("#newUser").hide();
+				$("#following").append("<div class=row>" +
+					"<h4 class=artistRow>" + artistName + "</h4>" +
+					"<button class=deletes id=" + artistName + "><img src=../static/images/delete.png></button>" + 
+					"</div>" +
+					"<center><hr id=hr></center>");
+				var objDiv = document.getElementById("following");
+				objDiv.scrollTop = objDiv.scrollHeight;
 			},
 			error: function(response) {
 				console.log(response.responseText);
@@ -190,27 +206,5 @@ $(document).ready(function() {
 	});
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
