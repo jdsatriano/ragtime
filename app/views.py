@@ -5,7 +5,7 @@ from twilio.rest import Client
 from multiprocessing import Process
 import time
 from . import eventful
-from . import MySQLdb
+import pymysql
 from datetime import datetime
 
 # Your Account SID from twilio.com/console
@@ -16,7 +16,7 @@ auth_token  = 'df6e17437def90ec7606a988358b0b84'
 api = eventful.API('cFcTHMNmdbgxPZmG')
 
 #connect to db, this is for use of alerts
-db = MySQLdb.connect(host='localhost', user='root', passwd='Satchabooty30', db='ragtime')
+db = pymysql.connect(host='localhost', user='root', passwd='Satchabooty30', db='ragtime')
 cursor = db.cursor()
 
 #main loop to check each users artistlist and send alerts accordingly
