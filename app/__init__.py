@@ -20,4 +20,4 @@ app.config['MYSQL_DATABASE_DB'] = 'ragtime'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
-import views
+from . import views
