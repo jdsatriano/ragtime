@@ -27,8 +27,8 @@ apilevel = "2.0"
 paramstyle = "format"
 
 from _mysql import *
-from MySQLdb.constants import FIELD_TYPE
-from MySQLdb.times import Date, Time, Timestamp, \
+from .constants import FIELD_TYPE
+from .times import Date, Time, Timestamp, \
     DateFromTicks, TimeFromTicks, TimestampFromTicks
 
 try:
@@ -77,7 +77,7 @@ def Binary(x):
 
 def Connect(*args, **kwargs):
     """Factory function for connections.Connection."""
-    from MySQLdb.connections import Connection
+    from .connections import Connection
     return Connection(*args, **kwargs)
 
 connect = Connection = Connect
