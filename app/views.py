@@ -16,7 +16,7 @@ auth_token  = 'df6e17437def90ec7606a988358b0b84'
 api = eventful.API('cFcTHMNmdbgxPZmG')
 
 #connect to db, this is for use of alerts
-db = pymysql.connect(host='localhost', user='root', passwd='Satchabooty30', db='ragtime')
+db = pymysql.connect(host='us-cdbr-iron-east-05.cleardb.net', user='b934367f15db1a', passwd='b69d91c6', db='heroku_17fda0644a3c554')
 cursor = db.cursor()
 
 #main loop to check each users artistlist and send alerts accordingly
@@ -60,10 +60,10 @@ def loop(x):
 	while(True):
 		time.sleep(86400)
 		alert()
-
+'''
 x = 1
 p = Process(target=loop, args=(x,))
-p.start()
+p.start()'''
 
 #ROUTES
 #------------------------------------------------------------------------------

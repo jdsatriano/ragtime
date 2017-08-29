@@ -14,10 +14,10 @@ loginManager.init_app(app)
 
 #MySQL configurations
 mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_USER'] = 'b934367f15db1a'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'b69d91c6'
-app.config['MYSQL_DATABASE_DB'] = 'ragtime'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_DB'] = 'heroku_17fda0644a3c554'
+app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
 mysql.init_app(app)
 
 from . import views
