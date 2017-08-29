@@ -4,7 +4,8 @@ from app import app, mysql
 from twilio.rest import Client
 from multiprocessing import Process
 import time
-from . import eventful, MySQLdb
+from . import eventful
+from . import MySQLdb
 from datetime import datetime
 
 # Your Account SID from twilio.com/console
