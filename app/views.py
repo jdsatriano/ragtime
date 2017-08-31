@@ -56,12 +56,12 @@ def alert():
 				#do nothing
 				x = 1
 	events = api.call('/events/search', location='Houston, TX', date='This Week', keywords='Buddy Guy')
-	for event in events['events']['event']:
+	'''for event in events['events']['event']:
 		st = event['title'] + ' at ' + event['venue_name'] + '\n' + event['start_time']
 		message = client.messages.create(
 			    to='2817148070', 
 			    from_='+18324302281',
-			    body=st)
+			    body=st)'''
 	return 'ok'
 
 #ROUTES
