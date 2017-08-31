@@ -56,11 +56,9 @@ def alert():
 				x = 1
 
 def loop(x):
-	alert()
-	'''
 	while(True):
 		time.sleep(86400)
-		alert()'''
+		alert()
 
 x = 1
 p = Process(target=loop, args=(x,))
