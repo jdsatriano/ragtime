@@ -6,7 +6,7 @@ import os
 #app configure
 app = Flask(__name__)
 
-app.secret_key = os.urandom(24)
+app.secret_key = 'qwertyuioplkjhgfdsazxcvbnm'
 
 #login man config
 loginManager = LoginManager()
