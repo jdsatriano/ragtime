@@ -35,7 +35,7 @@ $(document).ready(function() {
 	$.ajax({
 		type: "POST",
 		url: "blah",
-		datatype: "JSON"
+		datatype: "JSON",
 		data: {},
 		success: function() {
 			console.log("yep");
@@ -44,7 +44,7 @@ $(document).ready(function() {
 			console.log("nope");
 		}
 	});
-	
+
 	function shakeForm() {
 		$("#password").css("border", "1px solid #d62929");
    		$("#password").effect("shake");
