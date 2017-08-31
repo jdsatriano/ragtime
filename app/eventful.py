@@ -36,7 +36,7 @@ If you don't have an application key, you can request one:
         if hasattr(self, 'user_key'):
             args['user'] = self.user
             args['user_key'] = self.user_key
-        args = urllib.urlencode(args)
+        args = urllib.parse.urlencode(args)
         url = "http://%s/json/%s?%s" % (self.server, method, args)
 
         # Make the request
