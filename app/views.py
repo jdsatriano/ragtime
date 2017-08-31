@@ -57,8 +57,8 @@ def alert():
 
 def loop(x):
 	while(True):
-		time.sleep(86400)
 		alert()
+		time.sleep(86400)
 
 x = 1
 p = Process(target=loop, args=(x,))
