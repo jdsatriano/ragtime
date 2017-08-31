@@ -35,7 +35,13 @@ $(document).ready(function() {
 		type: "POST",
 		url: "/blah",
 		datatype: "JSON",
-		data: {}
+		data: {},
+		success: function() {
+			console.log("worked");
+		},
+		error: function() {
+			console.log("nope");
+		}
 	});
 
 	function shakeForm() {
