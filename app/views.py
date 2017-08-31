@@ -20,51 +20,51 @@ db = pymysql.connect(host='ragtimedbinstance.ccykdvhkhfyx.us-east-2.rds.amazonaw
 cursor = db.cursor()
 
 #main loop to check each users artistlist and send alerts accordingly
-def alert():
-	client = Client(account_sid, auth_token)
-	cursor.execute('SELECT * FROM users')
-	rows = cursor.fetchall()
+#def alert():
+client = Client(account_sid, auth_token)
+cursor.execute('SELECT * FROM users')
+rows = cursor.fetchall()
 
-	for row in rows:
-		phone = '+1' + row[3]
-		loc = row[5]
-		lis = json.loads(row[4])
+for row in rows:
+	phone = '+1' + row[3]
+	loc = row[5]
+	lis = json.loads(row[4])
 
-		for artist in lis:
-			#api doesn't accept '&' as in Mumord & Sons, so try changing to 'and'
-			try:
-				artist = artist.replace('&', 'and')
-			except:
-				#do nothing
-				x = 1
-			try:
-				events = api.call('/events/search', location=loc, date='This Week', keywords=artist)
-				for event in events['events']['event']:
-					time = str(event['start_time'])
-					d, t = time.split(' ')
-					t = t[:-3]
-					ti = datetime.strptime(t, '%H:%M')
-					ti = ti.strftime("%I:%M %p")
-					st = event['title'] + ' at ' + event['venue_name'] + '\n' + d + '\n' + ti
-					message = client.messages.create(
-						    to=phone, 
-						    from_='+18324302281',
-						    body=st)
-					break #just need one
-			except:
-				#do nothing
-				x = 1
-
+	for artist in lis:
+		#api doesn't accept '&' as in Mumord & Sons, so try changing to 'and'
+		try:
+			artist = artist.replace('&', 'and')
+		except:
+			#do nothing
+			x = 1
+		try:
+			events = api.call('/events/search', location=loc, date='This Week', keywords=artist)
+			for event in events['events']['event']:
+				time = str(event['start_time'])
+				d, t = time.split(' ')
+				t = t[:-3]
+				ti = datetime.strptime(t, '%H:%M')
+				ti = ti.strftime("%I:%M %p")
+				st = event['title'] + ' at ' + event['venue_name'] + '\n' + d + '\n' + ti
+				message = client.messages.create(
+					    to=phone, 
+					    from_='+18324302281',
+					    body=st)
+				break #just need one
+		except:
+			#do nothing
+			x = 1
+'''
 def loop(x):
-	alert()
+	alert()'''
 	'''
 	while(True):
 		time.sleep(86400)
 		alert()'''
-
+'''
 x = 1
 p = Process(target=loop, args=(x,))
-p.start()
+p.start()'''
 
 #ROUTES
 #------------------------------------------------------------------------------
