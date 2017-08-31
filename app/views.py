@@ -38,7 +38,7 @@ for row in rows:
 			#do nothing
 			x = 1
 		try:
-			events = api.call('/events/search', location=loc, date='This Week', keywords=artist)
+			events = api.call('/events/search', location='Houston, TX', date='This Week', keywords='Buddy Guy')
 			for event in events['events']['event']:
 				time = str(event['start_time'])
 				d, t = time.split(' ')
