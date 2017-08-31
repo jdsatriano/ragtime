@@ -6,7 +6,7 @@ import os
 #app configure
 app = Flask(__name__)
 
-app.secret_key = 'qwertyuioplkjhgfdsazxcvbnm'
+app.secret_key = 'SECRET_KEY'
 
 #login man config
 loginManager = LoginManager()
@@ -14,10 +14,10 @@ loginManager.init_app(app)
 
 #MySQL configurations
 mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'jdsatch'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Satchabooty30'
-app.config['MYSQL_DATABASE_DB'] = 'ragtime'
-app.config['MYSQL_DATABASE_HOST'] = 'ragtimedbinstance.ccykdvhkhfyx.us-east-2.rds.amazonaws.com'
+app.config['MYSQL_DATABASE_USER'] = ''
+app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_DB'] = ''
+app.config['MYSQL_DATABASE_HOST'] = ''
 mysql.init_app(app)
 
 from . import views
