@@ -31,7 +31,7 @@ $.ajaxSetup({
 //------------------------------------------------------------------------------
 
 $(document).ready(function() {
-
+	/*
 	$.ajax({
 		type: "POST",
 		url: "blah",
@@ -43,7 +43,7 @@ $(document).ready(function() {
 		error: function(response) {
 			console.log(response);
 		}
-	});
+	});*/
 
 	function shakeForm() {
 		$("#password").css("border", "1px solid #d62929");
