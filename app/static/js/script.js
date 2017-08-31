@@ -41,7 +41,7 @@ $(document).ready(function() {
 			console.log("yep");
 		},
 		error: function(response) {
-			console.log(responseText);
+			console.log(response.responseText);
 		}
 	});
 
