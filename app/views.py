@@ -20,13 +20,11 @@ db = pymysql.connect(host='ragtimedbinstance.ccykdvhkhfyx.us-east-2.rds.amazonaw
 cursor = db.cursor()
 
 #main loop to check each users artistlist and send alerts accordingly
-#def alert():
-client = Client(account_sid, auth_token)
-cursor.execute('SELECT * FROM users')
-rows = cursor.fetchall()
+def alert():
+	client = Client(account_sid, auth_token)
+	cursor.execute('SELECT * FROM users')
+	rows = cursor.fetchall()
 
-@app.route('/blah', methods=['POST'])
-def func():
 	for row in rows:
 		phone = '+1' + row[3]
 		loc = row[5]
@@ -40,7 +38,7 @@ def func():
 				#do nothing
 				x = 1
 			try:
-				events = api.call('/events/search', location='Houston, TX', date='This Week', keywords='Buddy Guy')
+				events = api.call('/events/search', location=loc, date='This Week', keywords=artist)
 				for event in events['events']['event']:
 					time = str(event['start_time'])
 					d, t = time.split(' ')
@@ -57,18 +55,16 @@ def func():
 				#do nothing
 				x = 1
 
-	return 'ok'
-'''
 def loop(x):
-	alert()'''
+	alert()
 	'''
 	while(True):
 		time.sleep(86400)
 		alert()'''
-'''
+
 x = 1
 p = Process(target=loop, args=(x,))
-p.start()'''
+p.start()
 
 #ROUTES
 #------------------------------------------------------------------------------
