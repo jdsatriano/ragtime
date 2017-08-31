@@ -121,6 +121,7 @@ $(document).ready(function() {
 			url: "/logout",
 			success: function(response) { 
 				document.write(response);
+				window.location.reload(true);
 			},
 			error: function(response) {
 				console.log(response.responseText);
