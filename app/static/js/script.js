@@ -40,8 +40,8 @@ $(document).ready(function() {
 		success: function() {
 			console.log("yep");
 		},
-		error: function() {
-			console.log("nope");
+		error: function(response) {
+			console.log(responseText);
 		}
 	});
 
