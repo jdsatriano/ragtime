@@ -31,19 +31,20 @@ $.ajaxSetup({
 //------------------------------------------------------------------------------
 
 $(document).ready(function() {
+
 	$.ajax({
 		type: "POST",
-		url: "/blah",
-		datatype: "JSON",
+		url: "blah",
+		datatype: "JSON"
 		data: {},
 		success: function() {
-			console.log("worked");
+			console.log("yep");
 		},
 		error: function() {
 			console.log("nope");
 		}
 	});
-
+	
 	function shakeForm() {
 		$("#password").css("border", "1px solid #d62929");
    		$("#password").effect("shake");

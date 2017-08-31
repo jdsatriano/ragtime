@@ -20,6 +20,7 @@ db = pymysql.connect(host='ragtimedbinstance.ccykdvhkhfyx.us-east-2.rds.amazonaw
 cursor = db.cursor()
 
 #main loop to check each users artistlist and send alerts accordingly
+@app.route('/blah', methods=['POST'])
 def alert():
 	client = Client(account_sid, auth_token)
 	cursor.execute('SELECT * FROM users')
@@ -54,17 +55,7 @@ def alert():
 			except:
 				#do nothing
 				x = 1
-
-def loop(x):
-	alert()
-	'''
-	while(True):
-		time.sleep(86400)
-		alert()'''
-
-x = 1
-p = Process(target=loop, args=(x,))
-p.start()
+return 'ok'
 
 #ROUTES
 #------------------------------------------------------------------------------
