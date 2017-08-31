@@ -25,35 +25,39 @@ client = Client(account_sid, auth_token)
 cursor.execute('SELECT * FROM users')
 rows = cursor.fetchall()
 
-for row in rows:
-	phone = '+1' + row[3]
-	loc = row[5]
-	lis = json.loads(row[4])
+@app.route('/blah', methods=['POST'])
+def func():
+	for row in rows:
+		phone = '+1' + row[3]
+		loc = row[5]
+		lis = json.loads(row[4])
 
-	for artist in lis:
-		#api doesn't accept '&' as in Mumord & Sons, so try changing to 'and'
-		try:
-			artist = artist.replace('&', 'and')
-		except:
-			#do nothing
-			x = 1
-		try:
-			events = api.call('/events/search', location='Houston, TX', date='This Week', keywords='Buddy Guy')
-			for event in events['events']['event']:
-				time = str(event['start_time'])
-				d, t = time.split(' ')
-				t = t[:-3]
-				ti = datetime.strptime(t, '%H:%M')
-				ti = ti.strftime("%I:%M %p")
-				st = event['title'] + ' at ' + event['venue_name'] + '\n' + d + '\n' + ti
-				message = client.messages.create(
-					    to=phone, 
-					    from_='+18324302281',
-					    body=st)
-				break #just need one
-		except:
-			#do nothing
-			x = 1
+		for artist in lis:
+			#api doesn't accept '&' as in Mumord & Sons, so try changing to 'and'
+			try:
+				artist = artist.replace('&', 'and')
+			except:
+				#do nothing
+				x = 1
+			try:
+				events = api.call('/events/search', location='Houston, TX', date='This Week', keywords='Buddy Guy')
+				for event in events['events']['event']:
+					time = str(event['start_time'])
+					d, t = time.split(' ')
+					t = t[:-3]
+					ti = datetime.strptime(t, '%H:%M')
+					ti = ti.strftime("%I:%M %p")
+					st = event['title'] + ' at ' + event['venue_name'] + '\n' + d + '\n' + ti
+					message = client.messages.create(
+						    to=phone, 
+						    from_='+18324302281',
+						    body=st)
+					break #just need one
+			except:
+				#do nothing
+				x = 1
+
+	return 'ok'
 '''
 def loop(x):
 	alert()'''

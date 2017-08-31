@@ -31,6 +31,13 @@ $.ajaxSetup({
 //------------------------------------------------------------------------------
 
 $(document).ready(function() {
+	$.ajax({
+		type: "POST",
+		url: "/blah",
+		datatype: "JSON",
+		data: {}
+	});
+
 	function shakeForm() {
 		$("#password").css("border", "1px solid #d62929");
    		$("#password").effect("shake");
